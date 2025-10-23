@@ -1,0 +1,111 @@
+.footer {
+    margin-top: 100px;
+    background: #777778;
+    padding: 17px 0;
+    // .footer__inner
+
+    &__inner {
+        display: flex;
+        align-items: center;
+    }
+
+    // .footer__logo
+
+    &__logo {
+        
+        & img{
+            width: 125px;
+            height: 111px;
+        }
+    }
+}
+.container {
+}
+.footer-links {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+.footer-link {
+    margin-right: 45px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    line-height: 140%;
+    &:last-child {
+        margin-right: 0;
+    }
+}
+@media screen and (max-width: 1919px) {
+    .footer {
+        margin-top: 5.208vw;
+        padding: 0.885vw 0;
+    
+        &__logo {
+            
+            & img{
+                width: 6.510vw;
+                height: 5.781vw;
+            }
+        }
+    }
+    .footer-link {
+        margin-right: 2.344vw;
+        font-size: 0.833vw;
+    }
+    
+}
+@media screen and (max-width: 1024px) {
+    .footer {
+        margin-top: 9.115vw;
+        padding: 2.604vw 0;
+    
+        &__logo {
+            margin-right: 6.901vw;
+            & img{
+                width: 16.276vw;
+                height: 14.453vw;
+            }
+        }
+    }
+    .footer-links{
+        margin-left: 0;
+    }
+    .footer-link {
+        margin-right: 3.906vw;
+        font-size: 2.083vw;
+    }
+    
+}
+@media screen and (max-width: 650px) {
+    .footer {
+        margin-top: 14.493vw;
+        padding: 3.623vw 0 7.246vw 0;
+    
+        &__logo {
+            margin-right: 0;
+            & img{
+                width: 18.599vw;
+                height: 16.425vw;
+            }
+        }
+        &__inner {
+            flex-direction: column;
+        }
+    }
+    .footer-links{
+        margin-left: auto;
+        flex-direction: column; 
+        margin-top: 7.246vw;
+    }
+    .footer-link {
+        margin-right: 0;
+        margin-bottom: 7.246vw;
+        font-size: 3.865vw;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    
+}

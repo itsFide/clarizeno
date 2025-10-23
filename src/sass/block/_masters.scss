@@ -1,0 +1,137 @@
+.masters {
+    padding-top: 100px;
+    // .masters__inner
+
+    // .masters__img
+    
+    &__img {
+        margin-top: 50px;
+        margin-bottom: 30px;
+        & img{
+            width: 100%;
+            height: 415px;
+        }
+    }
+    .stage{
+        margin-top: 30px;
+        &-item{
+            margin-bottom: 20px;
+            padding: 30px;
+            border-radius: 20px;
+            background-color: $gray-light;
+            color: #fff;
+            font-size: 18px;
+            line-height: 140%;
+            & span{
+                color: $orange;
+                font-weight: 600;
+            }
+            
+        }
+    }
+    &__descr{
+        & span{
+            font-weight: 600;
+        }
+    }
+    // .masters__descr
+
+}
+@media screen and (max-width: 1919px) {
+    .masters {
+        padding-top: 5.208vw;
+        // .masters__inner
+    
+        // .masters__img
+        
+        &__img {
+            margin-top: 2.604vw;
+            margin-bottom: 1.563vw;
+            & img{
+                height: 21.615vw;
+            }
+        }
+        .stage{
+            margin-top: 1.563vw;
+            &-item{
+                margin-bottom: 1.042vw;
+                padding: 1.563vw;
+                border-radius: 1.042vw;
+                
+                font-size: 0.938vw;
+                
+                
+                
+            }
+        }
+        
+        // .masters__descr
+    
+    }
+}
+@media screen and (max-width: 1024px) {
+    .masters {
+        padding-top: 10.417vw;
+        // .masters__inner
+    
+        // .masters__img
+        
+        &__img {
+            margin-top: 3.906vw;
+            margin-bottom: 3.255vw;
+            & img{
+                height: 54.036vw;
+            }
+        }
+        .stage{
+            margin-top: 3.255vw;
+            &-item{
+                margin-bottom: 1.953vw;
+                padding: 3.906vw;
+                border-radius: 2.604vw;
+                
+                font-size: 2.344vw;
+                
+                
+                
+            }
+        }
+        
+        // .masters__descr
+    
+    }
+}
+@media screen and (max-width: 650px) {
+    .masters {
+        padding-top: 14.493vw;
+        // .masters__inner
+    
+        // .masters__img
+        
+        &__img {
+            margin-top: 4.831vw;
+            margin-bottom: 4.831vw;
+            & img{
+                height: 53.623vw;
+            }
+        }
+        .stage{
+            margin-top: 4.831vw;
+            
+            &-item{
+                margin-bottom: 3.623vw;
+                padding: 4.831vw;
+                border-radius: 4.831vw;
+                margin-left: 2.415vw;
+                margin-right: 2.415vw;
+                font-size: 4.348vw;
+                
+                
+                
+            }
+        }
+        
+        // .masters__descr
+    
+    }
+}

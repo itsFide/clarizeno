@@ -1,0 +1,36 @@
+.header {
+    padding-top: 10px;
+    @media screen and (max-width: 1919px) {
+        padding-top: 0.521vw;
+    }
+    // .header__logo
+    @media screen and (max-width: 1024px) {
+        padding-top: 3.906vw;
+    }
+    @media screen and (max-width: 650px) {
+        padding-top: 3.623vw;
+    }
+    &__logo {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+        & img{
+            width: 113px;
+            height: 100px;
+            @media screen and (max-width: 1919px) {
+                width: 5.885vw;
+                height: 5.208vw;
+            }
+            @media screen and (max-width: 1024px) {
+                width: 14.714vw;
+                height: 13.021vw;
+            }
+            @media screen and (max-width: 650px) {
+                width: 24.155vw;
+                height: 21.498vw;
+            }
+        }
+    }
+}
+

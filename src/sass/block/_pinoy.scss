@@ -1,0 +1,114 @@
+.pinoy {
+    padding-top: 100px;
+    // .pinoy__inner
+
+    // .pinoy__title
+
+    &__title {
+        & span{
+            padding: 0 14px;
+        }
+    }
+
+    // .pinoy__img
+
+    &__img {
+        margin-top: 55px;
+        margin-bottom: 24px;
+        & img{
+            width: 100%;
+            height: 340px;
+        }
+    }
+
+    // .pinoy__descr
+
+    &__descr {
+        margin-bottom: 20px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+@media screen and (max-width: 1919px) {
+    .pinoy {
+        padding-top: 5.208vw;
+
+        &__title {
+            & span{
+                padding: 0 0.729vw;
+            }
+        }
+    
+        // .pinoy__img
+    
+        &__img {
+            margin-top: 2.865vw;
+            margin-bottom: 1.250vw;
+            & img{
+                height: 17.708vw;
+            }
+        }
+    
+        // .pinoy__descr
+    
+        &__descr {
+            margin-bottom: 1.042vw;
+        }
+    }
+}
+@media screen and (max-width: 1024px) {
+    .pinoy {
+        padding-top: 12.109vw;
+
+        &__title {
+            & span{
+                padding: 0 1.823vw;
+            }
+        }
+    
+        // .pinoy__img
+    
+        &__img {
+            margin-top: 3.906vw;
+            margin-bottom: 3.255vw;
+            & img{
+                height: 44.271vw;
+            }
+        }
+    
+        // .pinoy__descr
+    
+        &__descr {
+            margin-bottom: 2.604vw;
+        }
+    }
+}
+@media screen and (max-width: 650px) {
+    .pinoy {
+        padding-top: 14.493vw;
+
+        &__title {
+            width: 57.971vw;
+            & span{
+                padding: 0 1.449vw;
+            }
+        }
+    
+        // .pinoy__img
+    
+        &__img {
+            margin-top: 4.831vw;
+            margin-bottom: 4.831vw;
+            & img{
+                height: 44.686vw;
+            }
+        }
+    
+        // .pinoy__descr
+    
+        &__descr {
+            margin-bottom: 3.623vw;
+        }
+    }
+}

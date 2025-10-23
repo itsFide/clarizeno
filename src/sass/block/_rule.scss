@@ -1,0 +1,107 @@
+.rule {
+    padding-top: 100px;
+    // .rule__inner
+
+    // .rule__img
+    
+    &__title{
+        padding-left: 30px;
+        & span{
+            background: transparent;
+            color: $orange;
+            padding: 0;
+        }
+    }
+    &__img {
+        margin-top: 50px;
+        margin-bottom: 30px;
+        & img{
+            width: 100%;
+            height: 428px;
+        }
+    }
+    &__subtitle{
+        margin-bottom: 20px;
+        color: $orange;
+        font-size: 22px;
+        line-height: 140%;
+        font-weight: 600;
+    }
+    // .rule__descr
+
+}
+@media screen and (max-width: 1919px) {
+    .rule {
+        padding-top: 5.208vw;
+        // .rule__inner
+    
+        // .rule__img
+        
+        &__title{
+            padding-left: 1.563vw;
+        }
+        &__img {
+            margin-top: 2.604vw;
+            margin-bottom: 1.563vw;
+            & img{
+                height: 22.292vw;
+            }
+        }
+        &__subtitle{
+            margin-bottom: 1.042vw;
+            font-size: 1.146vw;
+        }
+        // .rule__descr
+    
+    }
+}
+@media screen and (max-width: 1024px) {
+    .rule {
+        padding-top: 10.417vw;
+        // .rule__inner
+    
+        // .rule__img
+        
+        &__title{
+            padding-left: 3.906vw;
+        }
+        &__img {
+            margin-top: 6.510vw;
+            margin-bottom: 3.906vw;
+            & img{
+                height: 55.729vw;
+            }
+        }
+        &__subtitle{
+            margin-bottom: 2.604vw;
+            margin-top: 3.906vw;
+            font-size: 2.865vw;
+        }
+        // .rule__descr
+    
+    }
+}
+@media screen and (max-width: 650px) {
+    .rule {
+        padding-top: 14.493vw;
+
+        &__title{
+            padding-left: 0;
+        }
+        // .rule__img
+    
+        &__img {
+            margin-top: 4.831vw;
+            margin-bottom: 4.831vw;
+            & img{
+                height: 55.797vw;
+            }
+        }
+        &__subtitle{
+            margin-bottom: 3.623vw;
+            margin-top: 0;
+            font-size: 5.314vw;
+        }
+        
+    }
+}

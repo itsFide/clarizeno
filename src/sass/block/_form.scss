@@ -1,0 +1,301 @@
+.legacy {
+    padding-top: 100px;
+    &__title {
+        margin-bottom: 50px;
+    }
+
+    
+}
+
+.form {
+    padding: 30px;
+    margin-top: 31px;
+    border-radius: 20px;
+    border: 2px solid $orange;
+    // .form__title
+    background: #4D5059;
+    &__title {
+        text-align: center;
+        font-size: 26px;
+        font-weight: 600;
+        color: #fff;
+        line-height: 140%;
+        & span{
+            color: #FFD369;
+        }
+    }
+
+    // .form__inner
+
+    &__inner {
+        margin-top: 30px;
+    }
+
+    // .form__item
+
+    &__item {
+        margin-bottom: 15px;
+        & p{
+            font-size: 18px;
+            color: #fff;
+        }
+        & input{
+            width: 100%;
+            padding: 16px 25px;
+            border-radius: 15px;
+            background: #393B42;
+            color: #CBCBCB;
+            border: none;
+            margin-top: 10px;
+            font-size: 16px;
+
+        }
+    }
+
+    // .form__descr
+
+    &__descr {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #fff;
+        width: 80%;
+        line-height: 140%;
+    }
+
+    // .form__btn
+
+    &__btn {
+        border: none;
+        padding: 16px 20px;
+        border-radius: 15px;
+        background: $orange;
+        color: #fff;
+        font-size: 26px;
+        font-weight: 700;
+        font-family: "Bebas Book";
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 31px;
+        display: block;
+        width: max-content;
+        cursor: pointer;
+    }
+
+    // .form__descr-last
+
+    &__descr-last {
+        margin-top: 25px;
+        font-size: 16px;
+        color: #fff;
+        width: 90%;
+        line-height: 140%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+@media screen and (max-width: 1919px) {
+    .legacy {
+        padding-top: 5.208vw;
+        &__title {
+            margin-bottom: 2.604vw;
+        }
+    
+        
+    }
+    
+    .form {
+        padding: 1.563vw;
+        margin-top: 1.615vw;
+        border-radius: 1.042vw;
+        border: 0.104vw solid $orange;
+        &__title {
+            font-size: 1.354vw;
+        }
+    
+        // .form__inner
+    
+        &__inner {
+            margin-top: 1.563vw;
+        }
+    
+        // .form__item
+    
+        &__item {
+            margin-bottom: 0.781vw;
+            & p{
+                font-size: 0.938vw;
+            }
+            & input{
+                padding: 0.833vw 1.302vw;
+                border-radius: 0.781vw;
+                margin-top: 0.521vw;
+                font-size: 0.833vw;
+    
+            }
+        }
+    
+        // .form__descr
+    
+        &__descr {
+            margin-top: 0.521vw;
+            font-size: 0.729vw;
+        }
+    
+        // .form__btn
+    
+        &__btn {
+            padding: 0.833vw 1.042vw;
+            border-radius: 0.781vw;
+            font-size: 1.354vw;
+            margin-top: 1.615vw;
+        }
+    
+        // .form__descr-last
+    
+        &__descr-last {
+            margin-top: 1.302vw;
+            font-size: 0.833vw;
+        }
+    }
+}
+@media screen and (max-width: 1024px) {
+    .legacy {
+        padding-top: 10.417vw;
+        &__title {
+            margin-bottom: 6.510vw;
+            width: 100%;
+        }
+    
+        
+    }
+    
+    .form {
+        padding: 3.906vw;
+        margin-top: 4.557vw;
+        border-radius: 2.604vw;
+        border: 0.260vw solid $orange;
+        &__title {
+            font-size: 3.385vw;
+        }
+    
+        // .form__inner
+    
+        &__inner {
+            margin-top: 3.906vw;
+        }
+    
+        // .form__item
+    
+        &__item {
+            margin-bottom: 1.953vw;
+            & p{
+                font-size: 2.344vw;
+            }
+            & input{
+                padding: 2.083vw 3.255vw;
+                border-radius: 1.953vw;
+                margin-top: 1.302vw;
+                font-size: 2.083vw;
+    
+            }
+        }
+    
+        // .form__descr
+    
+        &__descr {
+            margin-top: 1.302vw;
+            font-size: 1.823vw;
+        }
+    
+        // .form__btn
+    
+        &__btn {
+            padding: 2.083vw 2.604vw;
+            border-radius: 1.953vw;
+            font-size: 3.385vw;
+            margin-top: 4.297vw;
+        }
+    
+        // .form__descr-last
+    
+        &__descr-last {
+            margin-top: 4.297vw;
+            font-size: 2.083vw;
+        }
+    }
+}
+@media screen and (max-width: 650px) {
+    .legacy {
+        padding-top: 14.493vw;
+        &__title {
+            margin-bottom: 4.831vw;
+            
+        }
+    
+        
+    }
+    
+    .form {
+        padding: 4.831vw;
+        margin-top: 10.628vw;
+        border-radius: 4.831vw;
+        border: 0.242vw solid $orange;
+        &__title {
+            font-size: 5.314vw;
+            width: 66.425vw;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    
+        // .form__inner
+    
+        &__inner {
+            margin-top: 4.831vw;
+        }
+    
+        // .form__item
+    
+        &__item {
+            margin-bottom: 3.623vw;
+            & p{
+                font-size: 3.865vw;
+            }
+            & input{
+                padding: 4.106vw 4.831vw;
+                border-radius: 3.623vw;
+                margin-top: 1.208vw;
+                font-size: 3.382vw;
+    
+            }
+        }
+    
+        // .form__descr
+    
+        &__descr {
+            margin-top: 2.415vw;
+            font-size: 2.415vw;
+            width: 92%;
+        }
+    
+        // .form__btn
+    
+        &__btn {
+            padding: 2.174vw 4.831vw;
+            border-radius: 2.415vw;
+            font-size: 4.831vw;
+            margin-top: 4.831vw;
+        }
+    
+        // .form__descr-last
+    
+        &__descr-last {
+            margin-top: 7.246vw;
+            font-size: 2.899vw;
+            width: 100%;
+            & br{
+                display: none;
+            }
+        }
+    }
+}
