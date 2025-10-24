@@ -1,7 +1,24 @@
 .control {
     padding-top: 100px;
     // .control__inner
-
+    &__title{
+        & span{
+            padding-left: 14px;
+            display: inline-block;
+            &::before{
+                content: '';
+                width: 315px;
+                height: 55px;
+                border-radius: 15px;
+                background: $orange;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: -1;
+            }
+        }
+    }
     // .control__img
     & p{
         padding-left: 30px;
@@ -22,7 +39,16 @@
     .control {
         padding-top: 5.208vw;
         // .control__inner
-    
+        &__title{
+            & span{
+                padding-left: 0.729vw;
+                &::before{
+                    width: 16.406vw;
+                    height: 2.865vw;
+                    border-radius: 0.781vw;
+                }
+            }
+        }
         // .control__img
         & p{
             padding-left: 1.563vw;
@@ -44,7 +70,16 @@
     .control {
         padding-top: 10.417vw;
 
-        
+        &__title{
+            & span{
+                padding-left: 1.823vw;
+                &::before{
+                    width: 41.016vw;
+                    height: 7.161vw;
+                    border-radius: 1.953vw;
+                }
+            }
+        }
     
         // .control__img
     
@@ -66,7 +101,16 @@
 @media screen and (max-width: 650px) {
     .control {
         padding-top: 14.493vw;
-
+        &__title{
+            & span{
+                padding-left: 1.691vw;
+                &::before{
+                    width: 48.551vw;
+                    height: 8.213vw;
+                    border-radius: 1.932vw;
+                }
+            }
+        }
     
         // .control__img
     
