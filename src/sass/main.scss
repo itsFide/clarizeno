@@ -137,6 +137,8 @@ body{
     color: $orange;
     text-decoration: underline;
     font-weight: 700;
+    pointer-events:none;
+    cursor: unset;
   }
   & span{
     color: $orange;
@@ -170,6 +172,8 @@ li a{
   color: $orange;
   text-decoration: underline;
   font-weight: 700;
+  pointer-events:none;
+  cursor: unset;
 
 }
 .banner{

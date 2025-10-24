@@ -6,7 +6,25 @@
 
     
 }
-
+.form-legacy__title{
+    & span{
+        padding-left: 12px;
+        padding-right: 12px;
+        display: inline-block;
+        &::before{
+            content: '';
+            width: 290px;
+            height: 51px;
+            border-radius: 15px;
+            background: $orange;
+            position: absolute;
+            left: 0;
+            top: 47%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+    }
+}
 .form {
     padding: 30px;
     margin-top: 31px;
@@ -103,7 +121,17 @@
     
         
     }
-    
+    .form-legacy__title{
+        & span{
+            padding-left: 0.625vw;
+            padding-right: 0.625vw;
+            &::before{
+                width: 15.104vw;
+                height: 2.656vw;
+                border-radius: 0.781vw;
+            }
+        }
+    }
     .form {
         padding: 1.563vw;
         margin-top: 1.615vw;
@@ -169,7 +197,17 @@
     
         
     }
-    
+    .form-legacy__title{
+        & span{
+            padding-left: 1.563vw;
+            padding-right: 1.563vw;
+            &::before{
+                width: 37.76vw;
+                height: 6.641vw;
+                border-radius: 1.953vw;
+            }
+        }
+    }
     .form {
         padding: 3.906vw;
         margin-top: 4.557vw;
@@ -235,7 +273,18 @@
     
         
     }
-    
+    .form-legacy__title{
+        & span{
+            padding-left: 1.449vw;
+            padding-right: 1.449vw;
+            &::before{
+                width: 44.928vw;
+                height: 8.213vw;
+                border-radius: 1.932vw;
+                top:46%;
+            }
+        }
+    }
     .form {
         padding: 4.831vw;
         margin-top: 10.628vw;

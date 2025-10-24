@@ -1,7 +1,25 @@
 .masters {
     padding-top: 100px;
     // .masters__inner
-
+    &__title{
+        & span{
+            padding-left: 13px;
+            padding-right: 13px;
+            display: inline-block;
+            &::before{
+                content: '';
+                width: 463px;
+                height: 49px;
+                border-radius: 15px;
+                background: $orange;
+                position: absolute;
+                left: 0;
+                top: 47%;
+                transform: translateY(-50%);
+                z-index: -1;
+            }
+        }
+    }
     // .masters__img
     
     &__img {
@@ -41,7 +59,17 @@
     .masters {
         padding-top: 5.208vw;
         // .masters__inner
-    
+        &__title{
+            & span{
+                padding-left: 0.677vw;
+                padding-right: 0.677vw;
+                &::before{
+                    width: 24.115vw;
+                    height: 2.552vw;
+                    border-radius: 0.781vw;
+                }
+            }
+        }
         // .masters__img
         
         &__img {
@@ -73,7 +101,17 @@
     .masters {
         padding-top: 10.417vw;
         // .masters__inner
-    
+        &__title{
+            & span{
+                padding-left: 1.823vw;
+                padding-right: 1.823vw;
+                &::before{
+                    width: 60.286vw;
+                    height: 6.38vw;
+                    border-radius: 1.953vw;
+                }
+            }
+        }
         // .masters__img
         
         &__img {
@@ -107,7 +145,18 @@
         // .masters__inner
     
         // .masters__img
-        
+        &__title{
+            & span{
+                padding-left: 1.932vw;
+                padding-right: 1.932vw;
+                &::before{
+                    width: 72.464vw;
+                    height: 8.213vw;
+                    border-radius: 1.932vw;
+                    top: 46%;
+                }
+            }
+        }
         &__img {
             margin-top: 4.831vw;
             margin-bottom: 4.831vw;
