@@ -1,0 +1,141 @@
+.pagkalalaki {
+    padding-top: 100px;
+    // .pagkalalaki__inner
+
+    // .pagkalalaki__img
+    & p,
+    &__title{
+        padding-left: 30px;
+    }
+    &__img {
+        margin-top: 50px;
+        margin-bottom: 30px;
+        & img{
+            width: 100%;
+            height: 477px;
+        }
+    }
+    &__title{
+        & span{
+            padding-left: 12px;
+            padding-right: 12px;
+            display: inline-block;
+            &::before{
+                content: '';
+                width: 100%;
+                height: 51px;
+                border-radius: 15px;
+                background: $orange;
+                position: absolute;
+                left: 0;
+                top: 47%;
+                transform: translateY(-50%);
+                z-index: -1;
+            }            
+        }
+    }
+    // .pagkalalaki__descr
+
+}
+@media screen and (max-width: 1919px) {
+    .pagkalalaki {
+        padding-top: 5.208vw;
+        // .pagkalalaki__inner
+    
+        // .pagkalalaki__img
+        & p,
+        &__title{
+            padding-left: 1.563vw;
+        }
+        &__title{
+            & span{
+                padding-left: 0.625vw;
+                padding-right: 0.625vw;
+                &::before{
+                    // width: 18.125vw;
+                    height: 2.656vw;
+                    border-radius: 0.781vw;
+                }            
+            }
+        }
+        &__img {
+            margin-top: 2.604vw;
+            margin-bottom: 1.563vw;
+            & img{
+                width: 100%;
+                height: 24.844vw;
+            }
+        }
+    
+        // .pagkalalaki__descr
+    
+    }
+}
+@media screen and (max-width: 1024px) {
+    .pagkalalaki {
+        padding-top: 10.417vw;
+
+        
+    
+        // .pagkalalaki__img
+    
+        &__img {
+            margin-top: 3.906vw;
+            margin-bottom: 3.255vw;
+            & img{
+                height: 62.109vw;
+            }
+        }
+        &__title{
+            & span{
+                padding-left: 1.563vw;
+                padding-right: 1.563vw;
+                &::before{
+                    // width: 45.313vw;
+                    height: 6.641vw;
+                    border-radius: 1.953vw;
+                }            
+            }
+        }
+        // .pagkalalaki__descr
+    
+        & p,
+        &__title{
+            padding-left: 3.516vw;
+        }
+    }
+}
+@media screen and (max-width: 650px) {
+    .pagkalalaki {
+        padding-top: 12.077vw;
+        &__title{
+            & span{
+                padding-left: 0.966vw;
+                padding-right: 0.966vw;
+                &::before{
+                    // width: 53.382vw;
+                    height: 8.213vw;
+                    top: 46%;
+                    border-radius: 1.932vw;
+                }            
+            }
+        }
+    
+        // .pagkalalaki__img
+    
+        &__img {
+            margin-top: 4.831vw;
+            margin-bottom: 4.831vw;
+            & img{
+                height: 62.077vw;
+            }
+        }
+    
+        // .pagkalalaki__descr
+    
+        & p,
+        &__title{
+            padding-left: 0;
+        }
+    }
+}

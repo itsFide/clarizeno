@@ -16,358 +16,361 @@ document.addEventListener("DOMContentLoaded", () => {
       prevEl: ".stories-swiper-button-prev",
     },
   });
+  let commentSection = document.querySelector("#comments");
+  if (commentSection) {
+/* ---------- CONFIG ---------- */
+const config = {
+  "comment-1": { likes: 121, daysAgo: 2, time: "3:15 PM" },
+  "comment-1-1": { likes: 276, daysAgo: 2, time: "6:34 PM" },
+  "comment-1-2": { likes: 87, daysAgo: 1, time: "11:07 AM" },
+  "comment-1-3": { likes: 381, daysAgo: 1, time: "4:33 PM" },
+  "comment-2": { likes: 211, daysAgo: 2, time: "8:44 PM" },
+  "comment-2-1": { likes: 33, daysAgo: 1, time: "9:25 AM" },
+  "comment-2-2": { likes: 298, daysAgo: 1, time: "12:53 PM" },
+  "comment-3": { likes: 113, daysAgo: 2, time: "9:02 AM" },
+  "comment-4": { likes: 198, daysAgo: 2, time: "3:37 PM" },
+  "comment-5": { likes: 94, daysAgo: 2, time: "5:22 PM" },
+  "comment-6": { likes: 154, daysAgo: 1, time: "10:29 AM" },
+  "comment-7": { likes: 203, daysAgo: 1, time: "11:19 AM" },
+  "comment-8": { likes: 176, daysAgo: 1, time: "1:52 PM" },
+};
 
-  /* ---------- CONFIG ---------- */
-  const config = {
-    "comment-1": { likes: 121, daysAgo: 2, time: "3:15 PM" },
-    "comment-1-1": { likes: 276, daysAgo: 2, time: "6:34 PM" },
-    "comment-1-2": { likes: 87, daysAgo: 1, time: "11:07 AM" },
-    "comment-1-3": { likes: 381, daysAgo: 1, time: "4:33 PM" },
-    "comment-2": { likes: 211, daysAgo: 2, time: "8:44 PM" },
-    "comment-2-1": { likes: 33, daysAgo: 1, time: "9:25 AM" },
-    "comment-2-2": { likes: 298, daysAgo: 1, time: "12:53 PM" },
-    "comment-3": { likes: 113, daysAgo: 2, time: "9:02 AM" },
-    "comment-4": { likes: 198, daysAgo: 2, time: "3:37 PM" },
-    "comment-5": { likes: 94, daysAgo: 2, time: "5:22 PM" },
-    "comment-6": { likes: 154, daysAgo: 1, time: "10:29 AM" },
-    "comment-7": { likes: 203, daysAgo: 1, time: "11:19 AM" },
-    "comment-8": { likes: 176, daysAgo: 1, time: "1:52 PM" },
-  };
+/* ---------- UTILITIES ---------- */
+function getFormattedDate(daysAgo, time) {
+  const now = new Date();
+  now.setDate(now.getDate() - daysAgo);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const dateString = now.toLocaleDateString("en-US", options);
+  return `${dateString}, ${time}`;
+}
 
-  /* ---------- UTILITIES ---------- */
-  function getFormattedDate(daysAgo, time) {
-    const now = new Date();
-    now.setDate(now.getDate() - daysAgo);
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    const dateString = now.toLocaleDateString("en-US", options);
-    return `${dateString}, ${time}`;
-  }
-
-  function formatNow() {
-    const now = new Date();
-    return now.toLocaleString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-    });
-  }
-
-  function genUID(prefix = "comment") {
-    if (window.crypto && crypto.randomUUID)
-      return `${prefix}-${crypto.randomUUID()}`;
-    return `${prefix}-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
-  }
-
-  /* ---------- SAFE APPEND ---------- */
-  function safeAppendReply(parentId, replyData) {
-    const existing = document.getElementById(replyData.id);
-    if (existing) return; // avoid duplicate render
-    addReply(
-      parentId,
-      replyData.name,
-      replyData.text,
-      replyData.image,
-      replyData.date,
-      replyData.id
-    );
-  }
-
-  /* ---------- INITIALIZE COMMENTS ---------- */
-  Object.entries(config).forEach(([id, data]) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-
-    const dateEl = el.querySelector(".comments-item__date");
-    const likeEl = el.querySelector(".comments-item__like p");
-    if (dateEl) dateEl.textContent = getFormattedDate(data.daysAgo, data.time);
-
-    let storedLikes = localStorage.getItem(`likes_${id}`);
-    let count = storedLikes ? parseInt(storedLikes) : data.likes;
-    if (likeEl) likeEl.textContent = count;
-
-    const likeBtn = el.querySelector(".comments-item__like");
-    const liked = localStorage.getItem(`liked_${id}`) === "true";
-    if (liked) likeBtn.classList.add("liked");
-
-    likeBtn.addEventListener("click", () => {
-      if (localStorage.getItem(`liked_${id}`) === "true") return;
-      count++;
-      likeEl.textContent = count;
-      localStorage.setItem(`likes_${id}`, count);
-      localStorage.setItem(`liked_${id}`, true);
-      likeBtn.classList.add("liked");
-    });
-
-    const replyBtn = el.querySelector(".comments-item__reply");
-    if (replyBtn)
-      replyBtn.addEventListener("click", () => openReplyForm(id, el));
+function formatNow() {
+  const now = new Date();
+  return now.toLocaleString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
   });
+}
 
-  /* ---------- REPLY FORM ---------- */
-  function openReplyForm(parentId, parentEl) {
-    if (parentEl.querySelector(".reply-form")) return;
+function genUID(prefix = "comment") {
+  if (window.crypto && crypto.randomUUID)
+    return `${prefix}-${crypto.randomUUID()}`;
+  return `${prefix}-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
+}
 
-    const form = document.createElement("form");
-    form.className = "comments-form reply-form";
-    form.innerHTML = `
-          <h3>Reply to Comment</h3>
-          <div class="comments-form-item">
-              <p>Name*</p>
-              <input type="text" class="reply-name">
-          </div>
-          <div class="comments-form-item">
-              <p>Email*</p>
-              <input type="text" class="reply-email">
-          </div>
-          <div class="comments-form-item comment-area">
-              <p>Comment*</p>
-              <textarea class="reply-text"></textarea>
-              <div class="import-btn">
-                  <img src="img/import-icon.svg" width="16" height="16" alt="comment">
-              </div>
-              <input type="file" class="reply-file" accept="image/*" style="display:none;">
-          </div>
-          <button type="button" class="comments-form-btn">share my Comment</button>
-          <div class="reply-preview"></div>
-        `;
-    parentEl.appendChild(form);
-
-    const importBtn = form.querySelector(".import-btn");
-    const fileInput = form.querySelector(".reply-file");
-    const preview = form.querySelector(".reply-preview");
-    let uploadedImage = null;
-
-    importBtn.addEventListener("click", () => fileInput.click());
-    fileInput.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-          uploadedImage = ev.target.result;
-          preview.innerHTML = `<img src="${uploadedImage}" style="max-width:150px;border-radius:8px;">`;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    form.querySelector(".comments-form-btn").addEventListener("click", () => {
-      const name = form.querySelector(".reply-name").value.trim();
-      const text = form.querySelector(".reply-text").value.trim();
-      if (!name || !text) {
-        alert("Please fill in Name and Comment.");
-        return;
-      }
-      addReply(parentId, name, text, uploadedImage);
-      form.remove();
-    });
-  }
-
-  /* ---------- ADD REPLY ---------- */
-  function addReply(
+/* ---------- SAFE APPEND ---------- */
+function safeAppendReply(parentId, replyData) {
+  const existing = document.getElementById(replyData.id);
+  if (existing) return; // avoid duplicate render
+  addReply(
     parentId,
-    name,
-    text,
-    image,
-    dateStr = null,
-    forcedId = null
-  ) {
-    const wrapper =
-      document.querySelector(`#${parentId} .comments-item-reply-wrap`) ||
-      (() => {
-        const div = document.createElement("div");
-        div.className = "comments-item-reply-wrap";
-        document.getElementById(parentId).appendChild(div);
-        return div;
-      })();
+    replyData.name,
+    replyData.text,
+    replyData.image,
+    replyData.date,
+    replyData.id
+  );
+}
 
-    const replyId = forcedId || genUID(`${parentId}-reply`);
-    const finalDate = dateStr || formatNow();
+/* ---------- INITIALIZE COMMENTS ---------- */
+Object.entries(config).forEach(([id, data]) => {
+  const el = document.getElementById(id);
+  if (!el) return;
 
-    if (document.getElementById(replyId)) return; // duplicate safety
+  const dateEl = el.querySelector(".comments-item__date");
+  const likeEl = el.querySelector(".comments-item__like p");
+  if (dateEl) dateEl.textContent = getFormattedDate(data.daysAgo, data.time);
 
-    const replyEl = document.createElement("div");
-    replyEl.id = replyId;
-    replyEl.className = "comments-item-reply-item";
-    replyEl.innerHTML = `
-          <div class="comments-item-info">
-            <div class="comments-item__content">
-              <div class="comments-item-head">
-                <div class="comments-item__name">${name}</div>
-                <div class="comments-item__date">${finalDate}</div>
-              </div>
-              <p class="comments-item__descr">${text}</p>
-              <div class="comments-item__actions">
-                <div class="comments-item__reply">Reply</div>
-                <div class="comments-item__like"><span>Like</span><img src="img/like-icon.svg" width="16" height="16"><p>0</p></div>
-              </div>
-              ${
-                image
-                  ? `<div class="comments-img"><img src="${image}" style="max-width:200px;border-radius:8px;"></div>`
-                  : ""
-              }
-            </div>
-          </div>
-        `;
-    wrapper.appendChild(replyEl);
+  let storedLikes = localStorage.getItem(`likes_${id}`);
+  let count = storedLikes ? parseInt(storedLikes) : data.likes;
+  if (likeEl) likeEl.textContent = count;
 
-    const storedReplies = JSON.parse(
-      localStorage.getItem(`replies_${parentId}`) || "[]"
-    );
-    if (!storedReplies.find((r) => r.id === replyId)) {
-      storedReplies.push({ id: replyId, name, text, image, date: finalDate });
-      localStorage.setItem(
-        `replies_${parentId}`,
-        JSON.stringify(storedReplies)
-      );
-    }
+  const likeBtn = el.querySelector(".comments-item__like");
+  const liked = localStorage.getItem(`liked_${id}`) === "true";
+  if (liked) likeBtn.classList.add("liked");
 
-    bindLike(replyId);
-    replyEl
-      .querySelector(".comments-item__reply")
-      .addEventListener("click", () => openReplyForm(replyId, replyEl));
-  }
-
-  /* ---------- LIKE SYSTEM ---------- */
-  function bindLike(id) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const likeEl = el.querySelector(".comments-item__like p");
-    const likeBtn = el.querySelector(".comments-item__like");
-    let count = parseInt(
-      localStorage.getItem(`likes_${id}`) || likeEl.textContent || 0
-    );
+  likeBtn.addEventListener("click", () => {
+    if (localStorage.getItem(`liked_${id}`) === "true") return;
+    count++;
     likeEl.textContent = count;
-    const liked = localStorage.getItem(`liked_${id}`) === "true";
-    if (liked) likeBtn.classList.add("liked");
-    likeBtn.addEventListener("click", () => {
-      if (localStorage.getItem(`liked_${id}`) === "true") return;
-      count++;
-      likeEl.textContent = count;
-      localStorage.setItem(`likes_${id}`, count);
-      localStorage.setItem(`liked_${id}`, true);
-      likeBtn.classList.add("liked");
-    });
-  }
-
-  /* ---------- RESTORE REPLIES ---------- */
-  Object.keys(localStorage).forEach((k) => {
-    if (k.startsWith("replies_")) {
-      const parentId = k.replace("replies_", "");
-      const replies = JSON.parse(localStorage.getItem(k));
-      replies.forEach((r) => safeAppendReply(parentId, r));
-    }
+    localStorage.setItem(`likes_${id}`, count);
+    localStorage.setItem(`liked_${id}`, true);
+    likeBtn.classList.add("liked");
   });
 
-  /* ---------- RESTORE USER COMMENTS ---------- */
-  const savedComments = JSON.parse(
-    localStorage.getItem("userComments") || "[]"
-  );
-  savedComments.forEach((c) =>
-    renderMainComment(c.id, c.name, c.text, c.image, c.date)
-  );
+  const replyBtn = el.querySelector(".comments-item__reply");
+  if (replyBtn)
+    replyBtn.addEventListener("click", () => openReplyForm(id, el));
+});
 
-  /* ---------- MAIN COMMENTS FORM ---------- */
-  const mainForm = document.querySelector(".comments-form");
-  const mainImport = mainForm.querySelector(".import-btn");
-  const previewArea = document.createElement("div");
-  previewArea.className = "main-preview";
-  mainForm.appendChild(previewArea);
-  let uploadedMainImage = null;
+/* ---------- REPLY FORM ---------- */
+function openReplyForm(parentId, parentEl) {
+  if (parentEl.querySelector(".reply-form")) return;
 
-  let mainFile = mainForm.querySelector('input[type="file"]');
-  if (!mainFile) {
-    mainFile = document.createElement("input");
-    mainFile.type = "file";
-    mainFile.accept = "image/*";
-    mainFile.style.display = "none";
-    mainForm.appendChild(mainFile);
-  }
+  const form = document.createElement("form");
+  form.className = "comments-form reply-form";
+  form.innerHTML = `
+        <h3>Reply to Comment</h3>
+        <div class="comments-form-item">
+            <p>Name*</p>
+            <input type="text" class="reply-name">
+        </div>
+        <div class="comments-form-item">
+            <p>Email*</p>
+            <input type="text" class="reply-email">
+        </div>
+        <div class="comments-form-item comment-area">
+            <p>Comment*</p>
+            <textarea class="reply-text"></textarea>
+            <div class="import-btn">
+                <img src="img/import-icon.svg" width="16" height="16" alt="comment">
+            </div>
+            <input type="file" class="reply-file" accept="image/*" style="display:none;">
+        </div>
+        <button type="button" class="comments-form-btn">share my Comment</button>
+        <div class="reply-preview"></div>
+      `;
+  parentEl.appendChild(form);
 
-  mainImport.addEventListener("click", () => mainFile.click());
-  mainFile.addEventListener("change", (e) => {
+  const importBtn = form.querySelector(".import-btn");
+  const fileInput = form.querySelector(".reply-file");
+  const preview = form.querySelector(".reply-preview");
+  let uploadedImage = null;
+
+  importBtn.addEventListener("click", () => fileInput.click());
+  fileInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (ev) => {
-        uploadedMainImage = ev.target.result;
-        previewArea.innerHTML = `<img src="${uploadedMainImage}" style="max-width:150px;border-radius:8px;">`;
+        uploadedImage = ev.target.result;
+        preview.innerHTML = `<img src="${uploadedImage}" style="max-width:150px;border-radius:8px;">`;
       };
       reader.readAsDataURL(file);
     }
   });
 
-  mainForm
-    .querySelector(".comments-form-btn")
-    .addEventListener("click", (e) => {
-      e.preventDefault();
-      const inputs = mainForm.querySelectorAll('input[name="name"]');
-      const name = inputs[0].value.trim();
-      const email = inputs[1].value.trim();
-      const text = mainForm
-        .querySelector('textarea[name="comment"]')
-        .value.trim();
-      if (!name || !email || !text) {
-        alert("Please fill all fields");
-        return;
-      }
+  form.querySelector(".comments-form-btn").addEventListener("click", () => {
+    const name = form.querySelector(".reply-name").value.trim();
+    const text = form.querySelector(".reply-text").value.trim();
+    if (!name || !text) {
+      alert("Please fill in Name and Comment.");
+      return;
+    }
+    addReply(parentId, name, text, uploadedImage);
+    form.remove();
+  });
+}
 
-      const newId = genUID("comment");
-      const dateStr = formatNow();
+/* ---------- ADD REPLY ---------- */
+function addReply(
+  parentId,
+  name,
+  text,
+  image,
+  dateStr = null,
+  forcedId = null
+) {
+  const wrapper =
+    document.querySelector(`#${parentId} .comments-item-reply-wrap`) ||
+    (() => {
+      const div = document.createElement("div");
+      div.className = "comments-item-reply-wrap";
+      document.getElementById(parentId).appendChild(div);
+      return div;
+    })();
 
-      renderMainComment(newId, name, text, uploadedMainImage, dateStr);
+  const replyId = forcedId || genUID(`${parentId}-reply`);
+  const finalDate = dateStr || formatNow();
 
-      const userComments = JSON.parse(
-        localStorage.getItem("userComments") || "[]"
-      );
-      if (!userComments.find((c) => c.id === newId)) {
-        userComments.push({
-          id: newId,
-          name,
-          text,
-          image: uploadedMainImage,
-          date: dateStr,
-        });
-        localStorage.setItem("userComments", JSON.stringify(userComments));
-      }
+  if (document.getElementById(replyId)) return; // duplicate safety
 
-      mainForm.reset();
-      previewArea.innerHTML = "";
-      uploadedMainImage = null;
-    });
-
-  /* ---------- RENDER MAIN COMMENT ---------- */
-  function renderMainComment(id, name, text, image, dateStr) {
-    if (document.getElementById(id)) return;
-    const newEl = document.createElement("div");
-    newEl.className = "comments-item";
-    newEl.id = id;
-    newEl.innerHTML = `
-          <div class="comments-item-info">
-            <div class="comments-item__content">
-              <div class="comments-item-head">
-                <div class="comments-item__name">${name}</div>
-                <div class="comments-item__date">${dateStr}</div>
-              </div>
-              <p class="comments-item__descr">${text}</p>
-              <div class="comments-item__actions">
-                <div class="comments-item__reply">Reply</div>
-                <div class="comments-item__like"><span>Like</span><img src="img/like-icon.svg" width="16" height="16"><p>0</p></div>
-              </div>
-              ${
-                image
-                  ? `<div class="comments-img"><img src="${image}" style="max-width:200px;border-radius:8px;"></div>`
-                  : ""
-              }
+  const replyEl = document.createElement("div");
+  replyEl.id = replyId;
+  replyEl.className = "comments-item-reply-item";
+  replyEl.innerHTML = `
+        <div class="comments-item-info">
+          <div class="comments-item__content">
+            <div class="comments-item-head">
+              <div class="comments-item__name">${name}</div>
+              <div class="comments-item__date">${finalDate}</div>
             </div>
+            <p class="comments-item__descr">${text}</p>
+            <div class="comments-item__actions">
+              <div class="comments-item__reply">Reply</div>
+              <div class="comments-item__like"><span>Like</span><img src="img/like-icon.svg" width="16" height="16"><p>0</p></div>
+            </div>
+            ${
+              image
+                ? `<div class="comments-img"><img src="${image}" style="max-width:200px;border-radius:8px;"></div>`
+                : ""
+            }
           </div>
-        `;
-    document.querySelector(".comments-items").appendChild(newEl);
-    bindLike(id);
-    newEl
-      .querySelector(".comments-item__reply")
-      .addEventListener("click", () => openReplyForm(id, newEl));
+        </div>
+      `;
+  wrapper.appendChild(replyEl);
+
+  const storedReplies = JSON.parse(
+    localStorage.getItem(`replies_${parentId}`) || "[]"
+  );
+  if (!storedReplies.find((r) => r.id === replyId)) {
+    storedReplies.push({ id: replyId, name, text, image, date: finalDate });
+    localStorage.setItem(
+      `replies_${parentId}`,
+      JSON.stringify(storedReplies)
+    );
+  }
+
+  bindLike(replyId);
+  replyEl
+    .querySelector(".comments-item__reply")
+    .addEventListener("click", () => openReplyForm(replyId, replyEl));
+}
+
+/* ---------- LIKE SYSTEM ---------- */
+function bindLike(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const likeEl = el.querySelector(".comments-item__like p");
+  const likeBtn = el.querySelector(".comments-item__like");
+  let count = parseInt(
+    localStorage.getItem(`likes_${id}`) || likeEl.textContent || 0
+  );
+  likeEl.textContent = count;
+  const liked = localStorage.getItem(`liked_${id}`) === "true";
+  if (liked) likeBtn.classList.add("liked");
+  likeBtn.addEventListener("click", () => {
+    if (localStorage.getItem(`liked_${id}`) === "true") return;
+    count++;
+    likeEl.textContent = count;
+    localStorage.setItem(`likes_${id}`, count);
+    localStorage.setItem(`liked_${id}`, true);
+    likeBtn.classList.add("liked");
+  });
+}
+
+/* ---------- RESTORE REPLIES ---------- */
+Object.keys(localStorage).forEach((k) => {
+  if (k.startsWith("replies_")) {
+    const parentId = k.replace("replies_", "");
+    const replies = JSON.parse(localStorage.getItem(k));
+    replies.forEach((r) => safeAppendReply(parentId, r));
+  }
+});
+
+/* ---------- RESTORE USER COMMENTS ---------- */
+const savedComments = JSON.parse(
+  localStorage.getItem("userComments") || "[]"
+);
+savedComments.forEach((c) =>
+  renderMainComment(c.id, c.name, c.text, c.image, c.date)
+);
+
+/* ---------- MAIN COMMENTS FORM ---------- */
+const mainForm = document.querySelector(".comments-form");
+const mainImport = mainForm.querySelector(".import-btn");
+const previewArea = document.createElement("div");
+previewArea.className = "main-preview";
+mainForm.appendChild(previewArea);
+let uploadedMainImage = null;
+
+let mainFile = mainForm.querySelector('input[type="file"]');
+if (!mainFile) {
+  mainFile = document.createElement("input");
+  mainFile.type = "file";
+  mainFile.accept = "image/*";
+  mainFile.style.display = "none";
+  mainForm.appendChild(mainFile);
+}
+
+mainImport.addEventListener("click", () => mainFile.click());
+mainFile.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      uploadedMainImage = ev.target.result;
+      previewArea.innerHTML = `<img src="${uploadedMainImage}" style="max-width:150px;border-radius:8px;">`;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+mainForm
+  .querySelector(".comments-form-btn")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    const inputs = mainForm.querySelectorAll('input[name="name"]');
+    const name = inputs[0].value.trim();
+    const email = inputs[1].value.trim();
+    const text = mainForm
+      .querySelector('textarea[name="comment"]')
+      .value.trim();
+    if (!name || !email || !text) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    const newId = genUID("comment");
+    const dateStr = formatNow();
+
+    renderMainComment(newId, name, text, uploadedMainImage, dateStr);
+
+    const userComments = JSON.parse(
+      localStorage.getItem("userComments") || "[]"
+    );
+    if (!userComments.find((c) => c.id === newId)) {
+      userComments.push({
+        id: newId,
+        name,
+        text,
+        image: uploadedMainImage,
+        date: dateStr,
+      });
+      localStorage.setItem("userComments", JSON.stringify(userComments));
+    }
+
+    mainForm.reset();
+    previewArea.innerHTML = "";
+    uploadedMainImage = null;
+  });
+
+/* ---------- RENDER MAIN COMMENT ---------- */
+function renderMainComment(id, name, text, image, dateStr) {
+  if (document.getElementById(id)) return;
+  const newEl = document.createElement("div");
+  newEl.className = "comments-item";
+  newEl.id = id;
+  newEl.innerHTML = `
+        <div class="comments-item-info">
+          <div class="comments-item__content">
+            <div class="comments-item-head">
+              <div class="comments-item__name">${name}</div>
+              <div class="comments-item__date">${dateStr}</div>
+            </div>
+            <p class="comments-item__descr">${text}</p>
+            <div class="comments-item__actions">
+              <div class="comments-item__reply">Reply</div>
+              <div class="comments-item__like"><span>Like</span><img src="img/like-icon.svg" width="16" height="16"><p>0</p></div>
+            </div>
+            ${
+              image
+                ? `<div class="comments-img"><img src="${image}" style="max-width:200px;border-radius:8px;"></div>`
+                : ""
+            }
+          </div>
+        </div>
+      `;
+  document.querySelector(".comments-items").appendChild(newEl);
+  bindLike(id);
+  newEl
+    .querySelector(".comments-item__reply")
+    .addEventListener("click", () => openReplyForm(id, newEl));
+}
+
   }
   const navItems = document.querySelectorAll(".page-nav__content-item");
   const sections = document.querySelectorAll(
