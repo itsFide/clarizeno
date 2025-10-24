@@ -15,7 +15,25 @@
             height: 477px;
         }
     }
-
+    &__title{
+        & span{
+            padding-left: 12px;
+            padding-right: 12px;
+            display: inline-block;
+            &::before{
+                content: '';
+                width: 348px;
+                height: 51px;
+                border-radius: 15px;
+                background: $orange;
+                position: absolute;
+                left: 0;
+                top: 47%;
+                transform: translateY(-50%);
+                z-index: -1;
+            }            
+        }
+    }
     // .pagkalalaki__descr
 
 }
@@ -28,6 +46,17 @@
         & p,
         &__title{
             padding-left: 1.563vw;
+        }
+        &__title{
+            & span{
+                padding-left: 0.625vw;
+                padding-right: 0.625vw;
+                &::before{
+                    width: 18.125vw;
+                    height: 2.656vw;
+                    border-radius: 0.781vw;
+                }            
+            }
         }
         &__img {
             margin-top: 2.604vw;
@@ -57,7 +86,17 @@
                 height: 62.109vw;
             }
         }
-    
+        &__title{
+            & span{
+                padding-left: 1.563vw;
+                padding-right: 1.563vw;
+                &::before{
+                    width: 45.313vw;
+                    height: 6.641vw;
+                    border-radius: 1.953vw;
+                }            
+            }
+        }
         // .pagkalalaki__descr
     
         & p,
@@ -69,7 +108,17 @@
 @media screen and (max-width: 650px) {
     .pagkalalaki {
         padding-top: 12.077vw;
-
+        &__title{
+            & span{
+                padding-left: 0.966vw;
+                padding-right: 0.966vw;
+                &::before{
+                    width: 53.382vw;
+                    height: 8.213vw;
+                    border-radius: 1.932vw;
+                }            
+            }
+        }
     
         // .pagkalalaki__img
     
