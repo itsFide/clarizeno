@@ -6,7 +6,21 @@
 
     &__title {
         & span{
-            padding: 0 14px;
+            padding-left: 14px;
+            &::before{
+                content: '';
+                width: 260px;
+                height: 64px;
+                border-radius: 15px;
+                background: $orange;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 260px;
+                height: 64px;
+                z-index: -1;
+            }            
         }
     }
 
@@ -36,7 +50,12 @@
 
         &__title {
             & span{
-                padding: 0 0.729vw;
+                padding-left: 0.729vw;
+                &::before{
+                    width: 13.542vw;
+                    height: 3.333vw;
+                    border-radius: 0.781vw;
+                }            
             }
         }
     
@@ -63,7 +82,12 @@
 
         &__title {
             & span{
-                padding: 0 1.823vw;
+                padding-left: 1.823vw;
+                &::before{
+                    width: 33.854vw;
+                    height: 8.333vw;
+                    border-radius: 1.953vw;
+                }            
             }
         }
     
@@ -91,7 +115,12 @@
         &__title {
             width: 59.971vw;
             & span{
-                padding: 0 1.449vw;
+                padding-left: 1.449vw;
+                &::before{
+                    width: 39.614vw;
+                    height: 8.213vw;
+                    border-radius: 1.932vw;
+                }            
             }
         }
     

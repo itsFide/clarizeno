@@ -10,8 +10,8 @@ html{
 
 @font-face {
     font-family: "Bebas Book";
-    src: url("../font/bebasneueregular-2.woff2");
-    font-weight: 400;
+    src: url("../font/BebasNeueCyrillic.woff2");
+    font-weight: 700;
     font-display: swap;
 }
 @font-face {
@@ -87,29 +87,33 @@ $gray-light:#4D5059;
   color: $gray;
   font-family: "Bebas Book";
   font-weight: 700;
-  line-height: 120%;
+  line-height: 46px;
   & span{
-    color: #fff;
-    background-color: $orange;
-    padding: 0 9px;
-    border-radius: 15px;
+    // color: #fff;
+    position: relative;
+    // background-color: $orange;
+    // padding: 0 9px;
+    // border-radius: 15px;
   }
   @media screen and (max-width: 1919px) {
+    line-height: 2.396vw;
     & span{
-      padding: 0 0.469vw;
-      border-radius: 0.781vw;
+      // padding: 0 0.469vw;
+      // border-radius: 0.781vw;
     }
   }
   @media screen and (max-width: 1024px) {
+    line-height: 5.99vw;
     & span{
-      padding: 0 1.172vw;
-      border-radius: 1.953vw;
+      // padding: 0 1.172vw;
+      // border-radius: 1.953vw;
     }
   }
   @media screen and (max-width: 650px) {
+    line-height: 7.246vw;
     & span{
-      padding: 0 1.208vw;
-      border-radius: 1.932vw;
+      // padding: 0 1.208vw;
+      // border-radius: 1.932vw;
     }
   }
 }
