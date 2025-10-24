@@ -6,6 +6,8 @@
 }
 html{
   scroll-behavior: smooth;
+
+
 }
 
 @font-face {
@@ -13,6 +15,12 @@ html{
     src: url("../font/BebasNeueCyrillic.woff2");
     font-weight: 700;
     font-display: swap;
+
+    /* Ключ: задаём метрики и убираем line-gap */
+    ascent-override: 90%;
+    descent-override: 22%;
+    line-gap-override: 0%;
+    size-adjust: 100%;
 }
 @font-face {
   font-family: "Lora";
@@ -88,8 +96,9 @@ $gray-light:#4D5059;
   font-family: "Bebas Book";
   font-weight: 700;
   line-height: 46px;
+
   & span{
-    // color: #fff;
+    color: #fff;
     position: relative;
     // background-color: $orange;
     // padding: 0 9px;
