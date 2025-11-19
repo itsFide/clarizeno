@@ -413,65 +413,178 @@ Make it Now.
         </p>
     </div>
 </section>
-				<section id="form" class="form-legacy legacy">
+				<style>
+.form ul{
+    margin-top: 20px;
+}
+.form ul p{
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+.form ul li{
+    padding-left: 20px;
+    color: #fff;
+    margin-bottom: 15px;
+    list-style: none;
+    position: relative;
+}
+.form ul li::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    background: #FFD369;
+    border-radius: 50%;
+}
+.form ul li strong{
+    color: #FFD369;
+}
+.form__btn{
+    text-decoration: none;
+    display: block;
+    width: max-content;
+}
+</style>
+<section id="form" class="form-legacy legacy">
 
     <div class="legacy__inner">
         <h2 class="form-legacy__title legacy__title title title-main">
-            <span>The Hero’s Filter:</span>  This is Where You Prove You
-Are Ready
+            <span>The Hero’s Filter:</span> This is Where You Prove You
+            Are Ready
         </h2>
-        
+
         <p class="legacy__descr article-descr">
-            This Path of Control is not for everyone. It is not for dreamers who only talk. It is not for the lazy who wait for swerte(luck). It is only for men who are ready to ACT.
+            This Path of Control is not for everyone. It is not for dreamers who only talk. It is not
+            for the lazy who wait for swerte(luck). It is only for men who are ready to ACT.
         </p>
         <p class="legacy__descr article-descr">
-            That is why this symbolic $9 trial fee is not a ‘price’. It is your filter. With this, you prove to us, and more importantly to yourself, that you came here to WIN, not just to watch.
+            That is why this symbolic $9 trial fee is not a ‘price’. It is your filter. With this, you
+            prove to us, and more importantly to yourself, that you came here to WIN, not just to watch.
         </p>
         <p class="legacy__descr article-descr">
-            The moment you pass this filter, you are instantly welcomed into our Bayan-our brotherhood. This is your new, active support system:
+            The moment you pass this filter, you are instantly welcomed into our Bayan-our brotherhood.
+            This is your new, active support system:
         </p>
         <p class="legacy__descr article-descr">
             <span>Your Bayanihan Support Chat:</span> <br>
-            You get immediate access to our private chat with expert curators. Our <span>average response time is 5-7 minutes.</span> No brother is left behind.
+            You get immediate access to our private chat with expert curators. Our <span>average
+                response time is 5-7 minutes.</span> No brother is left behind.
         </p>
         <p class="legacy__descr article-descr">
             <span>Your First Victory Bot:</span> <br>
-We immediately give you our ‘Ready Bot’ for a quick start. It's a pre-set bot you can launch in your first week just by copying the settings, designed to help you get your first small profit.
+            We immediately give you our ‘Ready Bot’ for a quick start. It's a pre-set bot you can launch
+            in your first week just by copying the settings, designed to help you get your first small
+            profit.
         </p>
         <p class="legacy__descr article-descr">
             Now, it is time. The path is clear.
         </p>
         <p class="legacy__descr article-descr">
             <span>Your Personal Kuya:</span> <br>
-            A real brother-in-arms will personally reach out to help you give your ‘Digital Worker’ its first <br>
+            A real brother-in-arms will personally reach out to help you give your ‘Digital Worker’ its
+            first <br>
             winning command.
-        </p> 
-        <form action="" class="form" method="post">
+        </p>
+        <div class="form">
             <h2 class="form__title">
-                Registration  <br>
+                <span>The Final Test:</span> <br> Are You a Builder or Just a ‘Bolero’?
+            </h2>
+            <p class="form__descr">Pare, we have reached the end of the page. Now comes the hard part. The moment of truth. We don't let just anyone into our Bayan. We protect our brotherhood from the lazy and the unserious. That is why, before you can even SEE the $9 offer, you must pass our <strong>"Hero’s Filter".</strong>
+            </p>
+            <ul>
+                <p>Here is the reality deal:</p>
+                <li>
+                    <strong>Most Men Will Fail Here:</strong> They will close this page, go back to scrolling Facebook, and keep waiting for swerte (luck). They are mere watchers. Puro dada, kulang sa gawa (All talk, no action).
+
+                </li>
+                <li>
+                    <strong>The 60-Second Challenge:</strong> We prepared 4 honest questions. It will take less than a minute, but it will demand 100% truth from you.
+
+
+                </li>
+                <li>
+                    <strong>No Commitment Yet:</strong> This is just a conversation between men to see if you are ready. If you pass, you get invited. If not, no hard feelings.
+
+
+                </li>
+            </ul>
+            <p class="form__descr">Are you ready to face yourself in the mirror and prove you are not just a 'bolero'?</strong>
+            </p>
+            <a href="quiz.html" class="form__btn btn">YES, I AM READY. TAKE THE HERO'S FILTER</a>
+            <p class="form__descr-last">Click above. Prove you are serious. Your family is waiting.</p>
+        </div>
+        <!-- <form action="" class="form" method="post">
+            <h2 class="form__title">
+                Registration <br>
                 <span>for the 7-Day Trial Training</span>
             </h2>
             <div class="form__inner">
                 <div class="form__item">
                     <p>Name:</p>
-                    <input type="text" name="name" placeholder="Your Name">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    <span class="error-message"></span>
+
                 </div>
                 <div class="form__item">
                     <p>Phone:</p>
-                    <input type="tel" name="tel" placeholder="09XX XXX XXXX">
+                    <input type="tel" id="tel" name="tel" placeholder="09XX XXX XXXX" required maxlength="14">
+                    <span class="error-message"></span>
+
                 </div>
                 <div class="form__item">
                     <p>Email:</p>
-                    <input type="email" name="email" placeholder="your@email.com">
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    <span class="error-message"></span>
+
                 </div>
-                <p class="form__descr">7-Day Trial: You will be charged $9 today for the first 7 days of access. <br> <br>
-                    Automatic Renewal: After your 7-day trial, your membership will automatically renew at $49 per month (billed every 30 days). <br> <br>
-                    Cancel Anytime: You can easily pause or cancel your subscription at any time before the next billing date.
-                    </p>
-                <button type="submit" class="form__btn btn"> I AM READY. JOIN THE BROTHERHOOD FOR $9</button>
-                <p class="form__descr-last">By clicking the button, you agree to our Terms of Service and Privacy Policy. We will send the access link to the email and phone number you provided.</p>
+                <p class="form__descr">7-Day Trial: You will be charged $9 today for the first 7 days of
+                    access. <br> <br>
+                    Automatic Renewal: After your 7-day trial, your membership will automatically renew
+                    at $49 per month (billed every 30 days). <br> <br>
+                    Cancel Anytime: You can easily pause or cancel your subscription at any time before
+                    the next billing date.
+                </p>
+                <button type="submit" class="form__btn btn"> I AM READY. JOIN THE BROTHERHOOD FOR
+                    $9</button>
+                <p class="form__descr-last">By clicking the button, you agree to our Terms of Service
+                    and Privacy Policy. We will send the access link to the email and phone number you
+                    provided.</p>
             </div>
         </form>
+        <style>
+        .error-message {
+            color: red;
+            font-size: 13px;
+            display: block;
+            margin-top: 5px;
+        }
+        .error {
+            border: 1px solid red !important;
+        }
+        .success-modal.modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .success-modal .modal__content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        .success-modal.modal.show {
+            display: flex;
+        }
+        </style> -->
     </div>
 </section>
 			</div>

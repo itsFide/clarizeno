@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Clarizeno</title>
+
+	<link rel="stylesheet", href="css/quiz.min.css">
+	
+</head>
+<body>
+    
+    <main class="main">
+        @@include("chunk/header.html")
+        @@include("chunk/quiz.html")
+		
+	</main>
+    <div class="dynamic-answer">
+        <div class="dynamic-answer__content">
+            <img src="img/quiz/dynamic-ans-icon.svg" alt="">
+            <p>
+                Ramdam kita, pare. <br>
+                Many of us started exactly there.
+            </p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hero = document.querySelector('.hero');
+            const quizzes = Array.from(document.querySelectorAll('.quiz')); // quiz-1..quiz-4
+            const finalLoader = document.querySelector('.final-loader');
+            const heroBtn = document.querySelector('.hero__btn');
+        
+            // Динамический ответ + затемнение
+            const dynamicAnswer = document.querySelector('.dynamic-answer');
+            const dynamicAnswerText = dynamicAnswer ? dynamicAnswer.querySelector('p') : null;
+        
+            const quizOverlay = document.createElement('div');
+            quizOverlay.className = 'quiz-overlay';
+            document.body.appendChild(quizOverlay);
+        
+            // --- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ---
+        
+            function hideAllStages() {
+                if (hero) hero.style.display = 'none';
+                quizzes.forEach(function (q) { q.style.display = 'none'; });
+                if (finalLoader) finalLoader.style.display = 'none';
+            }
+        
+            function updateProgressForQuiz(quizEl, stepIndex, totalSteps) {
+                if (!quizEl) return;
+                const line = quizEl.querySelector('.quiz-progress__line');
+                if (!line) return;
+                const percent = Math.max(0, Math.min(100, (stepIndex / totalSteps) * 100));
+                line.style.width = percent + '%';
+            }
+        
+            // Показываем нужный вопрос. stepIndex: 1..4 (по тексту "Question X of 4")
+            function showQuizStep(stepIndex) {
+                const quizClass = 'quiz-' + stepIndex;
+                const quizEl = quizzes.find(function (q) { return q.classList.contains(quizClass); });
+        
+                hideAllStages();
+        
+                if (quizEl) {
+                    quizEl.style.display = 'block';
+                    updateProgressForQuiz(quizEl, stepIndex, 4);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+        
+            function showHero() {
+                hideAllStages();
+                if (hero) {
+                    hero.style.display = 'block';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+        
+            // Показ динамического фидбека после Q2 и Q3
+            function showDynamicFeedback(messageHTML, anchorEl, onDone) {
+                if (!dynamicAnswer || !dynamicAnswerText || !anchorEl) {
+                    if (typeof onDone === 'function') {
+                        onDone();
+                    }
+                    return;
+                }
+        
+                // Текст
+                dynamicAnswerText.innerHTML = messageHTML;
+        
+                // Позиционируем возле кнопки
+                const rect = anchorEl.getBoundingClientRect();
+                const top = window.scrollY + rect.top - 10; // чуть выше кнопки
+                const left = window.scrollX + rect.left + rect.width / 2;
+                
+                dynamicAnswer.style.top = top + 'px';
+                dynamicAnswer.style.left = left + 'px';
+        
+                // Сбрасываем анимацию
+                dynamicAnswer.classList.remove('dynamic-answer--animate');
+                // рефлоу для перезапуска анимации
+                void dynamicAnswer.offsetWidth;
+        
+                // Показываем оверлей и ответ
+                quizOverlay.style.display = 'block';
+                dynamicAnswer.style.display = 'flex';
+        
+                requestAnimationFrame(function () {
+                    dynamicAnswer.classList.add('dynamic-answer--animate');
+                });
+                
+                // Через 2 секунды убираем и двигаемся дальше
+                setTimeout(function () {
+                    quizOverlay.style.display = 'none';
+                    dynamicAnswer.style.display = 'none';
+                    if (typeof onDone === 'function') {
+                        onDone();
+                    }
+                }, 2000);
+            }
+        
+            // Финальный лоадер и редирект
+            function showFinalLoaderAndRedirect() {
+                // hideAllStages();
+                if (!finalLoader) return;
+        
+                finalLoader.style.display = 'flex';
+                window.scrollTo({ top: 0, behavior: 'auto' });
+        
+                const items = finalLoader.querySelectorAll('ul li');
+                const title = finalLoader.querySelector('.final-loader__title');
+        
+                // Скрываем всё перед анимацией
+                items.forEach(function (li) {
+                    li.style.opacity = 0;
+                });
+                if (title) {
+                    title.style.opacity = 0;
+                }
+        
+                let delay = 0;
+                const stepInterval = 1000; // 1 секунда на каждый шаг
+        
+                items.forEach(function (li) {
+                    setTimeout(function () {
+                        li.style.opacity = 1;
+                    }, delay);
+                    delay += stepInterval;
+                });
+        
+                // Показываем финальный заголовок после последнего шага
+                setTimeout(function () {
+                    if (title) {
+                        title.style.opacity = 1;
+                    }
+                }, delay);
+        
+                // Ещё чуть-чуть задержки и редирект на страницу продажи
+                const redirectDelay = delay + 800;
+                const redirectUrl = '/order.html'; // <--- сюда поставь реальный URL страницы продажи
+        
+                setTimeout(function () {
+                    window.location.href = redirectUrl;
+                }, redirectDelay);
+            }
+        
+            // --- ИНИЦИАЛИЗАЦИЯ ---
+        
+            hideAllStages();
+            showHero();
+        
+            // Старт: клик по кнопке "HANDA NA AKO"
+            if (heroBtn) {
+                heroBtn.addEventListener('click', function () {
+                    showQuizStep(1);
+                });
+            }
+        
+            // --- ВОПРОС 1: просто переход к вопросу 2 ---
+        
+            const quiz1 = document.querySelector('.quiz-1');
+            if (quiz1) {
+                const btnYes = quiz1.querySelector('.quiz-btn-yes');
+                const btnNo = quiz1.querySelector('.quiz-btn-no');
+        
+                [btnYes, btnNo].forEach(function (btn) {
+                    if (!btn) return;
+                    btn.addEventListener('click', function () {
+                        showQuizStep(2);
+                    });
+                });
+            }
+        
+            // --- ВОПРОС 2: динамический фидбек + переход к вопросу 3 ---
+        
+            const quiz2 = document.querySelector('.quiz-2');
+            if (quiz2) {
+                const q2Buttons = quiz2.querySelectorAll('.quiz-buttons-2 .quiz-btn-item');
+        
+                q2Buttons.forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        const message = 'Ramdam kita, pare.<br>Many of us started exactly there.';
+                        showDynamicFeedback(message, btn, function () {
+                            showQuizStep(3);
+                        });
+                    });
+                });
+            }
+        
+            // --- ВОПРОС 3: другой текст динамики + переход к вопросу 4 ---
+        
+            const quiz3 = document.querySelector('.quiz-3');
+            if (quiz3) {
+                const q3Buttons = quiz3.querySelectorAll('.quiz-buttons-2 .quiz-btn-item');
+        
+                q3Buttons.forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        const message = "Solid choice.<br>Let's make it real.";
+                        showDynamicFeedback(message, btn, function () {
+                            showQuizStep(4);
+                        });
+                    });
+                });
+            }
+        
+            // --- ВОПРОС 4: финальная кнопка, показываем лоадер и редирект ---
+        
+            const quiz4 = document.querySelector('.quiz-4');
+            if (quiz4) {
+                const finalBtn = quiz4.querySelector('.quiz-main-btn');
+                if (finalBtn) {
+                    finalBtn.addEventListener('click', function () {
+                        showFinalLoaderAndRedirect();
+                    });
+                }
+            }
+        });
+    </script>
+        <script>
+            // Функция, которая подгоняет main под высоту окна
+            function scaleMainToViewport() {
+                const main = document.querySelector('main');
+                if (!main) return;
+        
+                // Сбрасываем масштаб, чтобы правильно измерить высоту
+                main.style.transform = 'scale(1)';
+        
+                const viewportHeight = window.innerHeight;
+                const mainHeight = main.offsetHeight;
+        
+                // Если всё и так влезает — не скейлим
+                if (mainHeight <= viewportHeight) {
+                    main.style.transform = 'scale(1)';
+        
+                    // Если хочешь вертикально центрировать экран при "недобитой" высоте:
+                    const extraSpace = viewportHeight - mainHeight;
+                    const topMargin = extraSpace / 2;
+        
+                    // Можно центрировать, либо оставить прижатым к верху (тогда закомментируй эту строку)
+                    main.style.marginTop = topMargin + 'px';
+                } else {
+                    // Контент выше экрана — скейлим вниз
+                    const scale = (viewportHeight / mainHeight) - 0.05;
+        
+                    main.style.transform = 'scale(' + scale + ')';
+                    // При переполнении прижимаем к верху
+                    main.style.marginTop = '0';
+                }
+            }
+        
+            // Запуск при загрузке
+            document.addEventListener('DOMContentLoaded', function () {
+                scaleMainToViewport();
+            });
+        
+            // Пересчёт при ресайзе окна
+            window.addEventListener('resize', function () {
+                scaleMainToViewport();
+            });
+        
+            // ВАЖНО: если у тебя шаги квиза переключаются
+            // через добавление/удаление классов (типа .quiz-1, .quiz-2),
+            // вызывай scaleMainToViewport() после смены шага,
+            // например внутри твоего обработчика "Next" / "Yes/No" кнопок.
+        </script>
+        
+</body>
+</html>
