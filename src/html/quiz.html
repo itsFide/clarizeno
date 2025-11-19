@@ -24,6 +24,19 @@
             </p>
         </div>
     </div>
+    
+    <div class="final-loader">
+        <div class="final-loader__content">
+            <ul>
+                <li>
+                    ⏳ Analyzing your answers...
+                </li>
+                <li>🔍 Checking Bayan capacity...</li>
+                <li>🤝 Matching you with a Kuya curator...</li>
+            </ul>
+            <p class="final-loader__title">✅ APPROVED. WELCOME, KAPATID.</p>
+        </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const hero = document.querySelector('.hero');
@@ -237,53 +250,54 @@
             }
         });
     </script>
-        <script>
-            // Функция, которая подгоняет main под высоту окна
-            function scaleMainToViewport() {
-                const main = document.querySelector('main');
-                if (!main) return;
-        
-                // Сбрасываем масштаб, чтобы правильно измерить высоту
+    <script>
+        // Функция, которая подгоняет main под высоту окна
+        function scaleMainToViewport() {
+            const main = document.querySelector('main');
+            if (!main) return;
+    
+            // Сбрасываем масштаб, чтобы правильно измерить высоту
+            main.style.transform = 'scale(1)';
+    
+            const viewportHeight = window.innerHeight;
+            const mainHeight = main.offsetHeight;
+    
+            // Если всё и так влезает — не скейлим
+            if (mainHeight <= viewportHeight) {
                 main.style.transform = 'scale(1)';
-        
-                const viewportHeight = window.innerHeight;
-                const mainHeight = main.offsetHeight;
-        
-                // Если всё и так влезает — не скейлим
-                if (mainHeight <= viewportHeight) {
-                    main.style.transform = 'scale(1)';
-        
-                    // Если хочешь вертикально центрировать экран при "недобитой" высоте:
-                    const extraSpace = viewportHeight - mainHeight;
-                    const topMargin = extraSpace / 2;
-        
-                    // Можно центрировать, либо оставить прижатым к верху (тогда закомментируй эту строку)
-                    main.style.marginTop = topMargin + 'px';
-                } else {
-                    // Контент выше экрана — скейлим вниз
-                    const scale = (viewportHeight / mainHeight) - 0.05;
-        
-                    main.style.transform = 'scale(' + scale + ')';
-                    // При переполнении прижимаем к верху
-                    main.style.marginTop = '0';
-                }
+    
+                // Если хочешь вертикально центрировать экран при "недобитой" высоте:
+                const extraSpace = viewportHeight - mainHeight;
+                const topMargin = extraSpace / 2;
+    
+                // Можно центрировать, либо оставить прижатым к верху (тогда закомментируй эту строку)
+                // main.style.marginTop = topMargin + 'px';
+                main.style.marginTop = '0';
+            } else {
+                // Контент выше экрана — скейлим вниз
+                const scale = (viewportHeight / mainHeight) - 0.05;
+    
+                main.style.transform = 'scale(' + scale + ')';
+                // При переполнении прижимаем к верху
+                main.style.marginTop = '0';
             }
-        
-            // Запуск при загрузке
-            document.addEventListener('DOMContentLoaded', function () {
-                scaleMainToViewport();
-            });
-        
-            // Пересчёт при ресайзе окна
-            window.addEventListener('resize', function () {
-                scaleMainToViewport();
-            });
-        
-            // ВАЖНО: если у тебя шаги квиза переключаются
-            // через добавление/удаление классов (типа .quiz-1, .quiz-2),
-            // вызывай scaleMainToViewport() после смены шага,
-            // например внутри твоего обработчика "Next" / "Yes/No" кнопок.
-        </script>
+        }
+    
+        // Запуск при загрузке
+        document.addEventListener('DOMContentLoaded', function () {
+            scaleMainToViewport();
+        });
+    
+        // Пересчёт при ресайзе окна
+        window.addEventListener('resize', function () {
+            scaleMainToViewport();
+        });
+    
+        // ВАЖНО: если у тебя шаги квиза переключаются
+        // через добавление/удаление классов (типа .quiz-1, .quiz-2),
+        // вызывай scaleMainToViewport() после смены шага,
+        // например внутри твоего обработчика "Next" / "Yes/No" кнопок.
+    </script>
         
 </body>
 </html>

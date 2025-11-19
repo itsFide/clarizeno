@@ -1060,12 +1060,11 @@ main{
     }
 }
 .final-loader{
-    width: 1370px;
-    height: 817px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 15%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0%;
+    top: 0%;
     background-image: url(../img/quiz/final-loader-bg.webp);
     background-size: cover;
     background-position: center;
@@ -1185,8 +1184,6 @@ main{
 
 @media screen and (max-width:1919px) {
     .final-loader{
-        width: 71.35vw;   // 1370px
-        height: 42.55vw;  // 817px
      
         &__title{
             font-size: 1.67vw;    // 32px
@@ -1205,9 +1202,6 @@ main{
 }
 @media screen and (max-width:1024px) {
     .final-loader{
-        width: 100vw;          // 768px
-        height: 113.15vw;      // 869px
-        top: 42%;
 
         &__title{
             font-size: 4.17vw;   // 32px
@@ -1232,9 +1226,6 @@ main{
 }
 @media screen and (max-width:650px) {
     .final-loader{
-        width: 100%;
-        height: 197.34vw; // 817px
-        top: 29%;
 
         &__title{
             font-size: 5.80vw;   // 24px

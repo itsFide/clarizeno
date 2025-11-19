@@ -170,6 +170,8 @@
 
 @media screen and (max-width: 650px) {
     .status {
+        width: 100%;
+        text-align: center;
         padding: 2.90vw 12.56vw;
         border: 0.24vw solid #3AD198;
         border-radius: 7.25vw;
@@ -191,6 +193,8 @@
         border: 0.48vw solid #EEAF2C;
         border-radius: 7.25vw;
         font-size: 3.86vw;
+        width: 100%;
+        justify-content: center;
 
         & p {
             margin-right: 1.21vw;
